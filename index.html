@@ -7,13 +7,44 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Écran de connexion/inscription -->
+    <div class="auth-screen" id="authScreen">
+        <div class="auth-container">
+            <h1 class="auth-logo">Zuno</h1>
+            <p class="auth-tagline">Connecte. Partage. Inspire.</p>
+
+            <div class="auth-tabs">
+                <span class="auth-tab active" id="tabLogin">Connexion</span>
+                <span class="auth-tab" id="tabSignup">Inscription</span>
+            </div>
+
+            <!-- Formulaire Connexion -->
+            <div class="auth-form" id="loginForm">
+                <input type="text" id="loginName" class="auth-input" placeholder="Nom d'utilisateur">
+                <input type="password" id="loginPassword" class="auth-input" placeholder="Mot de passe">
+                <button class="auth-btn" id="loginBtn">Se connecter</button>
+                <p class="auth-error" id="loginError"></p>
+            </div>
+
+            <!-- Formulaire Inscription -->
+            <div class="auth-form" id="signupForm" style="display:none;">
+                <input type="text" id="signupName" class="auth-input" placeholder="Nom complet">
+                <input type="text" id="signupUsername" class="auth-input" placeholder="Nom d'utilisateur">
+                <input type="password" id="signupPassword" class="auth-input" placeholder="Mot de passe">
+                <button class="auth-btn" id="signupBtn">Créer mon compte</button>
+                <p class="auth-error" id="signupError"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran d'accueil (app) -->
     <div class="app">
         <!-- Header -->
         <header class="header">
             <h1 class="logo">Zuno</h1>
             <div class="header-icons">
                 <span class="icon">🔍</span>
-                <span class="icon">🔔</span>
+                <span class="icon" id="openNotifications">🔔</span>
             </div>
         </header>
 
@@ -163,6 +194,20 @@
         </div>
 
         <button class="btn-publish" id="publishBtn">Publier</button>
+    </div>
+    <!-- Écran Notifications -->
+    <div class="notifications-screen" id="notificationsScreen">
+        <header class="header">
+            <span class="icon" id="closeNotifications">←</span>
+            <h1 class="logo" style="font-size:18px;">Notifications</h1>
+            <span class="mark-read" id="markReadBtn">Tout marquer</span>
+        </header>
+
+        <div class="notif-section-title">Nouvelles</div>
+
+        <div class="notifications-list" id="notificationsList">
+            <!-- Générée en JS -->
+        </div>
     </div>
     <script src="js/app.js"></script>
 </body>

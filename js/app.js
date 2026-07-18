@@ -336,4 +336,38 @@ document.getElementById("publishBtn").addEventListener("click", () => {
     pendingImage = null;
 
     document.getElementById("createScreen").classList.remove("active");
+});const notifications = [
+    { id: 1, name: "Aminata Diarrassouba", avatar: "https://i.pravatar.cc/150?img=5", action: "a aimé votre publication.", time: "2 min", unread: true },
+    { id: 2, name: "David Konan", avatar: "https://i.pravatar.cc/150?img=12", action: "a commenté votre publication.", time: "15 min", unread: true },
+    { id: 3, name: "Christelle Kouamé", avatar: "https://i.pravatar.cc/150?img=9", action: "a partagé votre publication.", time: "1 h", unread: false },
+    { id: 4, name: "Koffi Bryan", avatar: "https://i.pravatar.cc/150?img=12", action: "a commencé à vous suivre.", time: "2 h", unread: false },
+    { id: 5, name: "Sarah Yao", avatar: "https://i.pravatar.cc/150?img=20", action: "a mentionné dans un commentaire.", time: "3 h", unread: false }
+];
+
+function renderNotifications() {
+    const list = document.getElementById("notificationsList");
+    list.innerHTML = notifications.map(n => `
+        <div class="notif-item ${n.unread ? 'unread' : ''}">
+            <div class="notif-avatar"><img src="${n.avatar}" alt=""></div>
+            <div class="notif-content">
+                <strong>${n.name}</strong> ${n.action}
+                <span class="notif-time">${n.time}</span>
+            </div>
+            ${n.unread ? '<div class="notif-dot"></div>' : ''}
+        </div>
+    `).join("");
+}
+renderNotifications();
+
+document.getElementById("openNotifications").addEventListener("click", () => {
+    document.getElementById("notificationsScreen").classList.add("active");
+});
+
+document.getElementById("closeNotifications").addEventListener("click", () => {
+    document.getElementById("notificationsScreen").classList.remove("active");
+});
+
+document.getElementById("markReadBtn").addEventListener("click", () => {
+    notifications.forEach(n => n.unread = false);
+    renderNotifications();
 });
