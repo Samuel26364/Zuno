@@ -1,4 +1,94 @@
-const stories = [
+// ===== GESTION CONNEXION / INSCRIPTION =====
+
+function getUsers() {
+    return JSON.parse(localStorage.getItem("zuno_users") || "[]");
+}
+
+function saveUsers(users) {
+    localStorage.setItem("zuno_users", JSON.stringify(users));
+}
+
+function showApp() {
+    document.getElementById("authScreen").classList.add("hidden");
+}
+
+// Vérifie si déjà connecté
+if (localStorage.getItem("zuno_current_user")) {
+    showApp();
+}
+
+// Bascule entre les onglets Connexion / Inscription
+document.getElementById("tabLogin").addEventListener("click", () => {
+    document.getElementById("tabLogin").classList.add("active");
+    document.getElementById("tabSignup").classList.remove("active");
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("signupForm").style.display = "none";
+});
+
+document.getElementById("tabSignup").addEventListener("click", () => {
+    document.getElementById("tabSignup").classList.add("active");
+    document.getElementById("tabLogin").classList.remove("active");
+    document.getElementById("signupForm").style.display = "flex";
+    document.getElementById("loginForm").style.display = "none";
+});
+
+// Inscription
+document.getElementById("signupBtn").addEventListener("click", () => {
+    const name = document.getElementById("signupName").value.trim();
+    const username = document.getElementById("signupUsername").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const errorEl = document.getElementById("signupError");
+
+    if (!name || !username || !password) {
+        errorEl.textContent = "Merci de remplir tous les champs.";
+        return;
+    }
+
+    const users = getUsers();
+    if (users.find(u => u.username === username)) {
+        errorEl.textContent = "Ce nom d'utilisateur existe déjà.";
+        return;
+    }
+
+    users.push({ name, username, password });
+    saveUsers(users);
+    localStorage.setItem("zuno_current_user", username);
+    errorEl.textContent = "";
+    showApp();
+});
+
+// Connexion
+document.getElementById("loginBtn").addEventListener("click", () => {
+    const username = document.getElementById("loginName").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const errorEl = document.getElementById("loginError");
+
+    const users = getUsers();
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (!user) {
+        errorEl.textContent = "Nom d'utilisateur ou mot de passe incorrect.";
+        return;
+    }
+
+    localStorage.setItem("zuno_current_user", username);
+    errorEl.textContent = "";
+    showApp();
+});
+// Bascule entre les onglets Connexion / Inscription
+document.getElementById("tabLogin").addEventListener("click", () => {
+    document.getElementById("tabLogin").classList.add("active");
+    document.getElementById("tabSignup").classList.remove("active");
+    document.getElementById("loginForm").style.display = "flex";
+    document.getElementById("signupForm").style.display = "none";
+});
+
+document.getElementById("tabSignup").addEventListener("click", () => {
+    document.getElementById("tabSignup").classList.add("active");
+    document.getElementById("tabLogin").classList.remove("active");
+    document.getElementById("signupForm").style.display = "flex";
+    document.getElementById("loginForm").style.display = "none";
+});const stories = [
     {
         id: 1,
         name: "David",
