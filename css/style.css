@@ -127,7 +127,6 @@ body {
     display: flex;
     gap: 12px;
     padding: 16px;
-    overflow-x: auto;
     border-bottom: 1px solid #1a1a1a;
 }
 
